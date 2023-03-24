@@ -15,11 +15,14 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(user -> users.add(userMapper.toDomainEntity(user)));
+        List<UserJpaEntity> userJpaEntities = userRepository.findAll();
+        for(UserJpaEntity userJpaEntity : userJpaEntities) {
+            users.add(userMapper.toDomainEntity(userJpaEntity));
+        }
         return users;
     }
 }
