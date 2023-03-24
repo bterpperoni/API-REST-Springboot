@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService extends GenericService<User, UserJpaEntity, UserMapper, UserRepository> {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -24,5 +24,15 @@ public class UserService {
             users.add(userMapper.toDomainEntity(userJpaEntity));
         }
         return users;
+    }
+
+    @Override
+    public UserRepository getRepo() {
+        return userRepository;
+    }
+
+    @Override
+    public UserMapper getMapper() {
+        return userMapper;
     }
 }
