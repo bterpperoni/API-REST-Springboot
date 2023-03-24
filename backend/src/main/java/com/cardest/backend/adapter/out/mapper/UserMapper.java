@@ -1,9 +1,8 @@
-package com.cardest.backend.adapter.out;
+package com.cardest.backend.adapter.out.mapper;
 
+import com.cardest.backend.adapter.out.jpa.UserJpaEntity;
 import com.cardest.backend.domain.model.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {

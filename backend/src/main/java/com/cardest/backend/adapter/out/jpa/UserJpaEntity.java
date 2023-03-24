@@ -1,4 +1,4 @@
-package com.cardest.backend.adapter.out;
+package com.cardest.backend.adapter.out.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

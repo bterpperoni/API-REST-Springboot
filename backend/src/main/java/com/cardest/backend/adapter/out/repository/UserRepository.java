@@ -1,5 +1,6 @@
-package com.cardest.backend.adapter.out;
+package com.cardest.backend.adapter.out.repository;
 
+import com.cardest.backend.adapter.out.jpa.UserJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserJpaEntity, Long> {
