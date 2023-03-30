@@ -13,7 +13,7 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
 
     abstract M getMapper();
 
-    public P getById(Long id) {
+    public P getById(Long id){
         Optional<E> objectEntity = getRepo().findById(id);
         if (objectEntity.isPresent()) {
             return getMapper().toDomainEntity(objectEntity.get());

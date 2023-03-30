@@ -29,7 +29,7 @@ public class UserJpaEntity{
     @Column(name = "FAMILY_NAME", nullable = false, length = 50)
     private String familyName;
 
-    @Column(name = "BIRTH_DATE", nullable = false)
+    @Column(name = "BIRTH_DATE")
     private Date birthDate;
 
     @Column(name = "EMAIL", nullable = false, length = 255)
