@@ -26,20 +26,19 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
         getRepo().deleteById(id);
     }
 
-    public P create(P object) {
+    public void create(P object) {
         E objectEntity = getMapper().toJpaEntity(object);
         getRepo().save(objectEntity);
-        return getMapper().toDomainEntity(objectEntity);
     }
 
-    public P update(P object, Long id) {
+    public void update(P object, Long id) {
         Optional<E> objectToUpdate = getRepo().findById(id);
         if (objectToUpdate.isPresent()) {
             E objectEntity = getMapper().toJpaEntity(object);
             E createdObject = getRepo().save(objectEntity);
-            return getMapper().toDomainEntity(createdObject);
+            getMapper().toDomainEntity(createdObject);
         } else {
-            throw new RuleException("Release not found", HttpStatus.BAD_REQUEST);
+            throw new RuleException("Object not found", HttpStatus.BAD_REQUEST);
         }
     }
 

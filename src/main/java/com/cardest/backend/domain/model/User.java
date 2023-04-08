@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -16,12 +14,6 @@ public class User {
     private String username;
     private String firstName;
     private String familyName;
-    private Date birthDate;
     private String email;
-    private String password;
-    private String phone;
-    private String address;
-    private String locality;
-    private String zip;
-    private String driverLicenseNumber;
+    private String aceNumber;
 }

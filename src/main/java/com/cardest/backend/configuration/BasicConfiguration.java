@@ -33,10 +33,9 @@ public class BasicConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+                // anonymous() to allow all requests without authentication
+                // todo: change this to allow only requests from the frontend
+                .anyRequest().anonymous();
         return http.build();
     }
 

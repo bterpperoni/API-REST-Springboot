@@ -35,8 +35,8 @@ public class UserJpaEntity{
     @Column(name = "EMAIL", nullable = false, length = 255)
     private String email;
 
-    @Column(name = "PASSWORD", nullable = false, length = 255)
-    private String password;
+    @Column(name = "ACE_NUMBER", nullable = false, length = 255)
+    private String aceNumber;
 
     @Column(name = "PHONE", unique = true, length = 15)
     private String phone;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +35,14 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
     @Override
     public UserMapper getMapper() {
         return userMapper;
+    }
+
+    public boolean getCurrentUser(String aceNumber) {
+        Optional<User> user = Optional.ofNullable(userRepository.existsByAceNumber(aceNumber));
+        if(user.isPresent()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
