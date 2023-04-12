@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "DESTINATIONS")
-public class DestinationEntity {
+public class DestinationJpaEntity {
     @Id
     @GeneratedValue
     private Long id;
