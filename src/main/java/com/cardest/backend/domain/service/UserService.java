@@ -37,12 +37,11 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
         return userMapper;
     }
 
-    public boolean getCurrentUser(String aceNumber) {
-        Optional<User> user = Optional.ofNullable(userRepository.existsByAceNumber(aceNumber));
-        if(user.isPresent()){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean isNewUser(String email) {
+        Optional<UserJpaEntity> userToGet = userRepository.findById(email);
+        if(userToGet.isPresent()){
+                return false;
+            }
+        return true;
     }
 }

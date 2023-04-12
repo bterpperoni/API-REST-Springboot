@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,5 +17,8 @@ public class User {
     private String firstName;
     private String familyName;
     private String email;
-    private String aceNumber;
+    private Date birthDate;
+    private String address;
+    private String locality;
+    private String zip;
 }

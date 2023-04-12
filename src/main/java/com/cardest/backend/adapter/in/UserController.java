@@ -30,9 +30,9 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping("/users/me")
-    public ResponseEntity<Boolean> isNewUser(@RequestParam String ace) {
-        boolean isNewUser = userService.getCurrentUser(ace);
+    @GetMapping("/users/new-user")
+    public ResponseEntity<Boolean> isNewUser(@RequestParam("em") String email) {
+        boolean isNewUser = userService.isNewUser(email);
         return ResponseEntity.ok().body(isNewUser);
     }
 
