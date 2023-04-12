@@ -1,7 +1,7 @@
 package com.cardest.backend.adapter.in;
 
-import com.cardest.backend.domain.model.User;
-import com.cardest.backend.domain.service.UserService;
+import com.cardest.backend.domain.model.users.User;
+import com.cardest.backend.domain.service.users.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,22 +29,28 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping("/users/new-user")
-    public ResponseEntity<Boolean> isNewUser(@RequestParam("em") String email) {
-        boolean isNewUser = userService.isNewUser(email);
-        return ResponseEntity.ok().body(isNewUser);
-    }
-
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = userService.getById(id);
         return ResponseEntity.ok().body(user);
     }
 
+    @GetMapping("/users/new-user")
+    public ResponseEntity<Boolean> isNewUser(@RequestParam("em") String email) {
+        boolean isNewUser = userService.isNewUser(email);
+        return ResponseEntity.ok().body(isNewUser);
+    }
+
+    @GetMapping("/users/user")
+    public ResponseEntity<User> getUserIdByEmail(@RequestParam("email") String email) {
+        User user = userService.getUserByEmail(email);
+        return ResponseEntity.ok().body(user);
+    }
+
     @PostMapping("/users")
-    public ResponseEntity<Void> createUser(@RequestBody User user) {
-        userService.create(user);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User userBody = userService.create(user);
+        return ResponseEntity.ok().body(userBody);
     }
 
     @PutMapping("/users/{id}")

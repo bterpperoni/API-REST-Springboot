@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 
 public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R extends JpaRepository<E, Long>> {
 
-    abstract R getRepo();
+    protected abstract R getRepo();
 
-    abstract M getMapper();
+    protected abstract M getMapper();
 
     public P getById(Long id){
         Optional<E> objectEntity = getRepo().findById(id);
@@ -26,9 +26,11 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
         getRepo().deleteById(id);
     }
 
-    public void create(P object) {
+    public P create(P object) {
         E objectEntity = getMapper().toJpaEntity(object);
         getRepo().save(objectEntity);
+        P objectToReturn = getMapper().toDomainEntity(objectEntity);
+        return objectToReturn;
     }
 
     public void update(P object, Long id) {

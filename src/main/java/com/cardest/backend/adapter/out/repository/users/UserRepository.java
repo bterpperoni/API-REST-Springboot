@@ -1,6 +1,6 @@
-package com.cardest.backend.adapter.out.repository;
+package com.cardest.backend.adapter.out.repository.users;
 
-import com.cardest.backend.adapter.out.jpa.UserJpaEntity;
+import com.cardest.backend.adapter.out.jpa.users.UserJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<UserJpaEntity, Long> {
      */
 
     @Query("SELECT u FROM UserJpaEntity u WHERE u.email = :email")
-    Optional<UserJpaEntity> findById(@Param("email") String email);
+    Optional<UserJpaEntity> findByEmail(@Param("email") String email);
 }
 

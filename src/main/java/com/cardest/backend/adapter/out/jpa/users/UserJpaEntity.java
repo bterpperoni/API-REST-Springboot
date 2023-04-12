@@ -1,4 +1,4 @@
-package com.cardest.backend.adapter.out.jpa;
+package com.cardest.backend.adapter.out.jpa.users;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,4 +49,7 @@ public class UserJpaEntity{
 
     @Column(name = "DRIVER_LICENSE_NUMBER", unique = true, length = 20)
     private String driverLicenseNumber;
+
+    @Column(name = "IS_NEW")
+    private Boolean isNew;
 }
