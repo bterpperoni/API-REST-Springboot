@@ -8,6 +8,9 @@ import com.cardest.backend.domain.service.GenericService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DestinationService extends GenericService<Destination, DestinationJpaEntity, DestinationMapper, DestinationRepository> {
@@ -22,5 +25,14 @@ public class DestinationService extends GenericService<Destination, DestinationJ
     @Override
     protected DestinationMapper getMapper() {
         return destinationMapper;
+    }
+
+    public List<Destination> getAllDestinations() {
+        List<Destination> destinations = new ArrayList<>();
+        List<DestinationJpaEntity> destinationJpaEntities = destinationRepository.findAll();
+        for(DestinationJpaEntity destinationJpaEntity : destinationJpaEntities) {
+            destinations.add(destinationMapper.toDomainEntity(destinationJpaEntity));
+        }
+        return destinations;
     }
 }

@@ -1,4 +1,4 @@
-package com.cardest.backend.adapter.in;
+package com.cardest.backend.adapter.in.users;
 
 import com.cardest.backend.domain.model.users.User;
 import com.cardest.backend.domain.service.users.UserService;
