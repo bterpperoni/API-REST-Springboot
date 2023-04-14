@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,37 +31,38 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<User> getUserById(@PathVariable("id") UUID id) {
         User user = userService.getById(id);
         return ResponseEntity.ok().body(user);
     }
 
     @GetMapping("/users/new-user")
-    public ResponseEntity<Boolean> isNewUser(@RequestParam("em") String email) {
-        boolean isNewUser = userService.isNewUser(email);
-        return ResponseEntity.ok().body(isNewUser);
+    public ResponseEntity<Boolean> isNewUser(@RequestParam("email") String email) {
+        Boolean isNew = userService.isNewUser(email);
+        return ResponseEntity.ok().body(isNew);
     }
 
     @GetMapping("/users/user")
-    public ResponseEntity<User> getUserIdByEmail(@RequestParam("email") String email) {
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email) {
         User user = userService.getUserByEmail(email);
         return ResponseEntity.ok().body(user);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User userBody = userService.create(user);
-        return ResponseEntity.ok().body(userBody);
+        user.setId(userService.generateID());
+        userService.create(user);
+        return ResponseEntity.ok().body(user);
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable("id") Long id) {
+    public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable("id") UUID id) {
         userService.update(user, id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") UUID id) {
         userService.delete(id);
         return ResponseEntity.ok().build();
     }

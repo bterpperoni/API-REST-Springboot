@@ -40,10 +40,11 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
         return users;
     }
 
-    public boolean isNewUser(String email) {
+    public Boolean isNewUser(String email) {
         Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
         if(userToGet.isPresent()){
-            userToGet.get().setIsNew(false);
+                userToGet.get().setIsNew(false);
+                userRepository.save(userToGet.get());
                 return false;
             }
         return true;
@@ -52,8 +53,7 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
     public User getUserByEmail(String email) {
         Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
         if(userToGet.isPresent()){
-            User user = userMapper.toDomainEntity(userToGet.get());
-            return user;
+            return userMapper.toDomainEntity(userToGet.get());
         }
         else{
             throw new RuleException("User not found", HttpStatus.BAD_REQUEST);

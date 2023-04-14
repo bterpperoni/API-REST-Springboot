@@ -1,43 +1,72 @@
 /*
     Test database.
  */
-ALTER USER cardest WITH PASSWORD 'password';
-
 DROP TABLE IF EXISTS USERS CASCADE;
-DROP TABLE IF EXISTS DESTINATION CASCADE;
+DROP TABLE IF EXISTS DESTINATIONS CASCADE;
+DROP TABLE IF EXISTS SUB_DESTINATIONS CASCADE;
+DROP TABLE IF EXISTS ADDRESS CASCADE;
 
-CREATE TABLE IF NOT EXISTS USERS (ID SERIAL PRIMARY KEY,
-                                  USERNAME VARCHAR(50) UNIQUE NOT NULL,
-                                  FIRST_NAME VARCHAR(50) NOT NULL,
-                                  FAMILY_NAME VARCHAR(50) NOT NULL,
-                                  BIRTH_DATE DATE,
-                                  EMAIL VARCHAR(255) NOT NULL UNIQUE ,
-                                  PHONE VARCHAR(15) UNIQUE,
-                                  ADDRESS VARCHAR(255),
-                                  LOCALITY VARCHAR(50),
-                                  ZIP VARCHAR(4),
-                                  DRIVER_LICENSE_NUMBER VARCHAR(20) UNIQUE,
-                                  IS_NEW BOOLEAN);
+CREATE TABLE IF NOT EXISTS USERS
+        (ID UUID PRIMARY KEY,
+        USERNAME VARCHAR(50) UNIQUE NOT NULL,
+        FIRST_NAME VARCHAR(50) NOT NULL,
+        FAMILY_NAME VARCHAR(50) NOT NULL,
+        BIRTH_DATE DATE,
+        EMAIL VARCHAR(255) NOT NULL UNIQUE ,
+        PHONE VARCHAR(15) UNIQUE,
+        ADDRESS VARCHAR(255),
+        LOCALITY VARCHAR(50),
+        ZIP VARCHAR(4),
+        DRIVER_LICENSE_NUMBER VARCHAR(20) UNIQUE,
+        IS_NEW BOOLEAN);
 
-CREATE TABLE IF NOT EXISTS DESTINATIONS (ID SERIAL PRIMARY KEY,
-                                        NAME VARCHAR(50) NOT NULL,
-                                        ADDRESS VARCHAR(255) NOT NULL,
-                                        LOCALITY VARCHAR(50) NOT NULL,
-                                        ZIP VARCHAR(4) NOT NULL,
-                                        LATITUDE DOUBLE PRECISION,
-                                        LONGITUDE DOUBLE PRECISION);
+CREATE TABLE IF NOT EXISTS ADDRESS
+        (ID UUID PRIMARY KEY,
+         ADDRESS VARCHAR(255) NOT NULL,
+         LOCALITY VARCHAR(50) NOT NULL,
+         ZIP VARCHAR(4) NOT NULL,
+         LATITUDE DOUBLE PRECISION,
+         LONGITUDE DOUBLE PRECISION,
+         RELATED_USER UUID REFERENCES USERS(ID) ON DELETE CASCADE);
 
-INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP)
-VALUES ('bobsmith', 'Bob', 'Smith', '1970-10-01', 'bobsmith@example.com', '555-5678', '789 Elm St', 'Anyville', '6789');
-INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, ADDRESS, LOCALITY, ZIP)
-VALUES ('janedoe', 'Jane', 'Doe', '1995-01-01', 'janedoe@example.com', '456 Park Ave', 'Anycity', '5678');
-INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP, DRIVER_LICENSE_NUMBER)
-VALUES ('johnsmith', 'John', 'Smith', '1985-05-15', 'johnsmith@example.com', '555-1234', '123 Main St', 'Anytown', '1234', 'AB123456');
+CREATE TABLE IF NOT EXISTS DESTINATIONS
+        (ID UUID PRIMARY KEY,
+        NAME VARCHAR(50) NOT NULL);
 
-INSERT INTO DESTINATIONS (NAME, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE) VALUES
-('Université de Mons', 'Place du Parc 20', 'Mons', '7000', 50.455185, 3.951430),
-('Fac. Polytechnique de Mons', 'Rue de Houdain 9', 'Mons', '7000', 50.454583, 3.952131),
-('Haute Ecole Louvain en Hainaut', 'Rue du Grand Trou Oudart 55', 'Mons', '7000', 50.457436, 3.946942),
-('HeH - Campus Technique', 'Avenue Victor Maistriau 15', 'Mons', '7000', 50.463727, 3.938247);
+CREATE TABLE IF NOT EXISTS SUB_DESTINATIONS
+        (ID UUID PRIMARY KEY,
+        NAME VARCHAR(50) NOT NULL,
+        ADDRESS VARCHAR(255) NOT NULL,
+        LOCALITY VARCHAR(50) NOT NULL,
+        ZIP VARCHAR(4) NOT NULL,
+        LATITUDE DOUBLE PRECISION,
+        LONGITUDE DOUBLE PRECISION,
+        RELATED_DESTINATION UUID REFERENCES DESTINATIONS(ID) ON DELETE CASCADE);
 
+INSERT INTO USERS (ID, USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP)
+VALUES (gen_random_uuid(),'bobsmith', 'Bob', 'Smith', '1970-10-01', 'bobsmith@example.com', '555-5678', '789 Elm St', 'Anyville', '6789');
+INSERT INTO USERS (ID, USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, ADDRESS, LOCALITY, ZIP)
+VALUES (gen_random_uuid(),'janedoe', 'Jane', 'Doe', '1995-01-01', 'janedoe@example.com', '456 Park Ave', 'Anycity', '5678');
+INSERT INTO USERS (ID, USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP, DRIVER_LICENSE_NUMBER)
+VALUES (gen_random_uuid(),'johnsmith', 'John', 'Smith', '1985-05-15', 'johnsmith@example.com', '555-1234', '123 Main St', 'Anytown', '1234', 'AB123456');
 
+INSERT INTO DESTINATIONS (ID, NAME) VALUES
+(gen_random_uuid(), 'Haute Ecole en Hainaut'),
+(gen_random_uuid(), 'UMons'),
+(gen_random_uuid(), 'Fac. Polytechnique'),
+(gen_random_uuid(), 'Haute Ecole Louvain en Hainaut');
+
+INSERT INTO SUB_DESTINATIONS (ID, NAME, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE) VALUES
+(gen_random_uuid(),'HeH - Campus Technique', 'Avenue Victor Maistriau 8', 'Mons', '7000', 50.461327,3.957912),
+(gen_random_uuid(),'HeH - Campus Economique', 'Rue de Nimy 23', 'Mons', '7000', 50.455953, 3.951682),
+(gen_random_uuid(),'HeH - Campus Social', 'Rue des Soeurs Noires 2', 'Mons', '7000', 50.454785, 3.952659),
+(gen_random_uuid(),'HeH - Campus Paramédical', 'Rue des Fripiers 57-59', 'Mons', '7000', 50.457739, 3.949094);
+
+INSERT INTO ADDRESS (ID, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE)
+SELECT gen_random_uuid(),
+       'Address ' || ROW_NUMBER() OVER () || ', Rue de Mons' || ROW_NUMBER() OVER (),
+       'Mons',
+       '7000',
+       50.460138 + RANDOM() * 0.02,
+       3.951838 + RANDOM() * 0.02
+FROM generate_series(1,4);

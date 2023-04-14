@@ -7,13 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @Table(name = "DESTINATIONS")
 public class DestinationJpaEntity {
     @Id
-    @GeneratedValue
-    private Long id;
+    @Column(name = "ID")
+    private UUID id;
 
     @Column(name = "NAME")
     private String name;

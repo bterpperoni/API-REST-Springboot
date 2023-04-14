@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<UserJpaEntity, Long> {
+public interface UserRepository extends JpaRepository<UserJpaEntity, UUID> {
     /*
         Inherits from JpaRepository which contains basic CRUD SQL operations.
      */
