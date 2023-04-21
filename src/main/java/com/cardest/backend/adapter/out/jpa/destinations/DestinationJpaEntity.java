@@ -15,23 +15,8 @@ import java.util.UUID;
 public class DestinationJpaEntity {
     @Id
     @Column(name = "ID")
-    private UUID id;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;
-
-    @Column(name = "ADDRESS")
-    private String address;
-
-    @Column(name = "LOCALITY")
-    private String locality;
-
-    @Column(name = "ZIP")
-    private String zip;
-
-    @Column(name = "LATITUDE")
-    private Double latitude;
-
-    @Column(name = "LONGITUDE")
-    private Double longitude;
 }

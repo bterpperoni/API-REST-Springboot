@@ -8,17 +8,13 @@ import com.cardest.backend.exception.RuleException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
-public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R extends JpaRepository<E, UUID>> {
+public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R extends JpaRepository<E, Long>> {
 
     protected abstract R getRepo();
 
     protected abstract M getMapper();
 
-    public UUID generateID(){
-        return UUID.randomUUID();
-    }
-
-    public P getById(UUID id){
+    public P getById(Long id){
         Optional<E> objectEntity = getRepo().findById(id);
         if (objectEntity.isPresent()) {
             return getMapper().toDomainEntity(objectEntity.get());
@@ -27,7 +23,7 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
         }
     }
 
-    public void delete(UUID id) {
+    public void delete(Long id) {
         getRepo().deleteById(id);
     }
 
@@ -37,7 +33,7 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
         return getMapper().toDomainEntity(objectEntity);
     }
 
-    public void update(P object, UUID id) {
+    public void update(P object, Long id) {
         Optional<E> objectToUpdate = getRepo().findById(id);
         if (objectToUpdate.isPresent()) {
             E objectEntity = getMapper().toJpaEntity(object);

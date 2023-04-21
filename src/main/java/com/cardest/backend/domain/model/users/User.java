@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Setter
 public class User {
 
-    private UUID id;
+    private Long id;
     private String username;
     private String firstName;
     private String familyName;

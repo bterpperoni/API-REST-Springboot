@@ -9,7 +9,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Destination {
+public class SubDestination {
+
     private Long id;
-    private String name;
+    private String address;
+    private String locality;
+    private String zip;
+    private Double latitude;
+    private Double longitude;
+    private String relatedDestination;
+
 }
