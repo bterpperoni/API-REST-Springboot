@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cardest@localhost" uuid="f40426d7-4438-480a-866e-14824d17e203">
+    <data-source source="LOCAL" name="cardestDB@localhost" uuid="5d9da534-8ccb-48f1-99d2-d24b7dbd0422">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/cardest</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/cardestDB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
