@@ -29,8 +29,7 @@ public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R exte
     public P create(P object) {
         E objectEntity = getMapper().toJpaEntity(object);
         getRepo().save(objectEntity);
-        P objectToReturn = getMapper().toDomainEntity(objectEntity);
-        return objectToReturn;
+        return getMapper().toDomainEntity(objectEntity);
     }
 
     public void update(P object, Long id) {

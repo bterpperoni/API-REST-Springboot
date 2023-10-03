@@ -52,8 +52,7 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
     public User getUserByEmail(String email) {
         Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
         if(userToGet.isPresent()){
-            User user = userMapper.toDomainEntity(userToGet.get());
-            return user;
+            return userMapper.toDomainEntity(userToGet.get());
         }
         else{
             throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
