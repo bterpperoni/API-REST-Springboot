@@ -1,6 +1,7 @@
 /*
     Test database.
  */
+
 ALTER USER cardest WITH PASSWORD '0000';
 
 DROP TABLE IF EXISTS USERS,ADDRESS,TRAVEL,DESTINATIONS CASCADE;
@@ -52,10 +53,23 @@ VALUES ('janedoe', 'Jane', 'Doe', '1995-01-01', 'janedoe@example.com', '456 Park
 INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP, DRIVER_LICENSE_NUMBER)
 VALUES ('johnsmith', 'John', 'Smith', '1985-05-15', 'johnsmith@example.com', '555-1234', '123 Main St', 'Anytown', '1234', 'AB123456');
 
-INSERT INTO DESTINATIONS (NAME, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE) VALUES
-('Université de Mons', 'Place du Parc 20', 'Mons', '7000', 50.455185, 3.951430),
-('Fac. Polytechnique de Mons', 'Rue de Houdain 9', 'Mons', '7000', 50.454583, 3.952131),
-('Haute Ecole Louvain en Hainaut', 'Rue du Grand Trou Oudart 55', 'Mons', '7000', 50.457436, 3.946942),
-('HeH - Campus Technique', 'Avenue Victor Maistriau 15', 'Mons', '7000', 50.463727, 3.938247);
+INSERT INTO DESTINATIONS (NAME) VALUES
+( 'Haute Ecole en Hainaut'),
+( 'UMons'),
+( 'Fac. Polytechnique'),
+( 'Haute Ecole Louvain en Hainaut');
 
+INSERT INTO SUB_DESTINATIONS (NAME, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE) VALUES
+('HeH - Campus Technique', 'Avenue Victor Maistriau 8', 'Mons', '7000', 50.461327,3.957912),
+('HeH - Campus Economique', 'Rue de Nimy 23', 'Mons', '7000', 50.455953, 3.951682),
+('HeH - Campus Social', 'Rue des Soeurs Noires 2', 'Mons', '7000', 50.454785, 3.952659),
+('HeH - Campus Paramédical', 'Rue des Fripiers 57-59', 'Mons', '7000', 50.457739, 3.949094);
 
+INSERT INTO ADDRESS (ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE)
+SELECT
+       'Address ' || ROW_NUMBER() OVER () || ', Rue de Mons' || ROW_NUMBER() OVER (),
+       'Mons',
+       '7000',
+       50.460138 + RANDOM() * 0.02,
+       3.951838 + RANDOM() * 0.02
+FROM generate_series(1,4);

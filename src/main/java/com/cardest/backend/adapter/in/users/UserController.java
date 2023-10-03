@@ -42,15 +42,15 @@ public class UserController {
     }
 
     @GetMapping("/users/user")
-    public ResponseEntity<User> getUserIdByEmail(@RequestParam("email") String email) {
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email) {
         User user = userService.getUserByEmail(email);
         return ResponseEntity.ok().body(user);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User userBody = userService.create(user);
-        return ResponseEntity.ok().body(userBody);
+        userService.create(user);
+        return ResponseEntity.ok().body(user);
     }
 
     @PutMapping("/users/{id}")

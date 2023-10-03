@@ -1,6 +1,7 @@
 package com.cardest.backend.domain.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import com.cardest.backend.adapter.out.mapper.GenericMapper;
 import com.cardest.backend.exception.RuleException;

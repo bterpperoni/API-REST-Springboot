@@ -40,10 +40,11 @@ public class UserService extends GenericService<User, UserJpaEntity, UserMapper,
         return users;
     }
 
-    public boolean isNewUser(String email) {
+    public Boolean isNewUser(String email) {
         Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
         if(userToGet.isPresent()){
-            userToGet.get().setIsNew(false);
+                userToGet.get().setIsNew(false);
+                userRepository.save(userToGet.get());
                 return false;
             }
         return true;
