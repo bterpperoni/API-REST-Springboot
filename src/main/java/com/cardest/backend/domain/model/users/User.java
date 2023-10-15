@@ -22,5 +22,5 @@ public class User {
     private String address;
     private String locality;
     private String zip;
-    private Boolean isNew;
+    private boolean isNew;
 }

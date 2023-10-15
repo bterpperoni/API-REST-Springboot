@@ -51,5 +51,5 @@ public class UserJpaEntity{
     private String driverLicenseNumber;
 
     @Column(name = "IS_NEW")
-    private Boolean isNew;
+    private boolean isNew;
 }
