@@ -21,28 +21,29 @@ public class TravelJpaEntity {
     @Column(name = "CHECK_POINT", length = 50, nullable = false)
     private String checkPoint;
 
+    @Column(name = "DEPARTURE", length = 50, nullable = false)
+    private String departure;
+
     @Column(name = "DEPARTURE_DATE", nullable = false)
     private Date departureDate;
 
-    @Column(name = "DESTINATION_DATE")
-    private Date destinationDate;
-
-    @Column(name = "DEPARTURE", length = 50, nullable = false)
-    private String departure;
+    @Column(name = "DEPARTURE_TIME", nullable = false)
+    private String departureTime;
 
     @Column(name = "DESTINATION", length = 50, nullable = false)
     private String destination;
 
-    @Column(name = "DISTANCE", nullable = false)
-    private Integer distance;
+    @Column(name = "DESTINATION_DATE")
+    private Date destinationDate;
+
+    @Column(name = "DESTINATION_TIME")
+    private String destinationTime;
 
     @Column(name = "PRICE")
     private Double price;
 
     @Column(name = "VALIDATED", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean validated;
-
-    // Constructeurs, getters et setters (omis pour la brièveté)
 
 }
 

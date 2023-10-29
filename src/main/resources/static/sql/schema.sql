@@ -1,7 +1,7 @@
 /*
     Test database.
  */
-ALTER USER cardest WITH PASSWORD '0000';
+ALTER USER cardest WITH PASSWORD 'qdzs';
 
 DROP TABLE IF EXISTS USERS,ADDRESS,TRAVEL,DESTINATIONS CASCADE;
 
@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS USERS (ID SERIAL PRIMARY KEY,
                                   DRIVER_LICENSE_NUMBER VARCHAR(20) UNIQUE,
                                   IS_NEW BOOLEAN);
 
-CREATE TABLE IF NOT EXISTS DESTINATIONS (ID SERIAL PRIMARY KEY,
+/*CREATE TABLE IF NOT EXISTS DESTINATIONS (ID SERIAL PRIMARY KEY,
                                         NAME VARCHAR(50) NOT NULL,
                                         ADDRESS VARCHAR(255) NOT NULL,
                                         LOCALITY VARCHAR(50) NOT NULL,
                                         ZIP VARCHAR(4) NOT NULL,
                                         LATITUDE DOUBLE PRECISION,
-                                        LONGITUDE DOUBLE PRECISION);
+                                        LONGITUDE DOUBLE PRECISION);*/
 
 CREATE TABLE IF NOT EXISTS ADDRESS(ID SERIAL PRIMARY KEY,
                                     USER_ID INTEGER,
@@ -38,11 +38,12 @@ CREATE TABLE IF NOT EXISTS TRAVEL(ID SERIAL PRIMARY KEY,
                                     DRIVER_ID INTEGER,
                                     PASSENGER_ID INTEGER,
                                     CHECK_POINT VARCHAR(50),
-                                    DEPARTURE_DATE DATE NOT NULL,
-                                    DESTINATION_DATE DATE,
                                     DEPARTURE VARCHAR(50) NOT NULL,
+                                    DEPARTURE_DATE DATE NOT NULL,
+                                    DEPARTURE_TIME TIME NOT NULL,
                                     DESTINATION VARCHAR(50) NOT NULL,
-                                    DISTANCE INTEGER NOT NULL,
+                                    DESTINATION_DATE DATE NOT NULL,
+                                    DESTINATION_TIME TIME,
                                     PRICE DOUBLE PRECISION,
                                     VALIDATED BOOLEAN DEFAULT FALSE);
 
@@ -53,10 +54,5 @@ VALUES ('janedoe', 'Jane', 'Doe', '1995-01-01', 'janedoe@example.com', '456 Park
 INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP, DRIVER_LICENSE_NUMBER)
 VALUES ('johnsmith', 'John', 'Smith', '1985-05-15', 'johnsmith@example.com', '555-1234', '123 Main St', 'Anytown', '1234', 'AB123456');
 
-INSERT INTO DESTINATIONS (NAME, ADDRESS, LOCALITY, ZIP, LATITUDE, LONGITUDE) VALUES
-('Université de Mons', 'Place du Parc 20', 'Mons', '7000', 50.455185, 3.951430),
-('Fac. Polytechnique de Mons', 'Rue de Houdain 9', 'Mons', '7000', 50.454583, 3.952131),
-('Haute Ecole Louvain en Hainaut', 'Rue du Grand Trou Oudart 55', 'Mons', '7000', 50.457436, 3.946942),
-('HeH - Campus Technique', 'Avenue Victor Maistriau 15', 'Mons', '7000', 50.463727, 3.938247);
 
 

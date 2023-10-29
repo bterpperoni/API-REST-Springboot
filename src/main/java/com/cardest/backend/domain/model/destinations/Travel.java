@@ -18,11 +18,12 @@ public class Travel {
     private String driverId;
     private String passengerId;
     private String checkPoint;
-    private Date departureDate;
-    private Date destinationlDate;
     private String departure;
+    private Date departureDate;
+    private String departureTime;
     private String destination;
-    private String distance;
+    private Date destinationlDate;
+    private String destinationTime;
     private double price;
     private boolean validated;
 
