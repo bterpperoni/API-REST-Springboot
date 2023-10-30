@@ -1,8 +1,15 @@
 package com.cardest.backend.adapter.out.jpa.destinations;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "TRAVEL")
 public class TravelJpaEntity {
 
@@ -14,15 +21,17 @@ public class TravelJpaEntity {
     @Column(name = "DRIVER_ID")
     private int driver;
 
-
-    @Column(name = "PASSENGER_ID")
-    private int passenger;
-
-    @Column(name = "CHECK_POINT", length = 50, nullable = false)
-    private String checkPoint;
+    @Column(name = "PASSENGERS", columnDefinition = "jsonb")
+    private JsonNode passengers;
 
     @Column(name = "DEPARTURE", length = 50, nullable = false)
     private String departure;
+
+    @Column(name = "DEPARTURE_LATITUDE")
+    private Double departureLatitude;
+
+    @Column(name = "DEPARTURE_LONGITUDE")
+    private Double departureLongitude;
 
     @Column(name = "DEPARTURE_DATE", nullable = false)
     private Date departureDate;
@@ -33,17 +42,20 @@ public class TravelJpaEntity {
     @Column(name = "DESTINATION", length = 50, nullable = false)
     private String destination;
 
+    @Column(name = "DESTINATION_LONGITUDE")
+    private Double destinationLatitude;
+
+    @Column(name = "DESTINATION_LATITUDE")
+    private Double destinationLongitude;
+
     @Column(name = "DESTINATION_DATE")
     private Date destinationDate;
 
     @Column(name = "DESTINATION_TIME")
     private String destinationTime;
 
-    @Column(name = "PRICE")
-    private Double price;
-
-    @Column(name = "VALIDATED", columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private Boolean validated;
+    @Column(name = "STATUS")
+    private int status;
 
 }
 
