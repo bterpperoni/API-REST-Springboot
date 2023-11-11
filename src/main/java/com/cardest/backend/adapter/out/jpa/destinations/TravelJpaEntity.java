@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "TRAVEL")
+@Table(name = "TRAVELS")
 public class TravelJpaEntity {
 
     @Id
@@ -22,7 +22,7 @@ public class TravelJpaEntity {
     private int driver;
 
     @Column(name = "PASSENGERS", columnDefinition = "jsonb")
-    private JsonNode passengers;
+    private String passengers;
 
     @Column(name = "DEPARTURE", length = 50, nullable = false)
     private String departure;

@@ -3,7 +3,7 @@
  */
 ALTER USER cardest WITH PASSWORD 'qdzs';
 
-DROP TABLE IF EXISTS USERS,ADDRESS,TRAVELS,DESTINATIONS CASCADE;
+DROP TABLE IF EXISTS USERS,ADDRESS,TRAVELS,DESTINATIONS, TRAVEL CASCADE;
 
 CREATE TABLE IF NOT EXISTS USERS (ID SERIAL PRIMARY KEY,
                                   USERNAME VARCHAR(50) UNIQUE NOT NULL,
@@ -36,17 +36,17 @@ CREATE TABLE IF NOT EXISTS USERS (ID SERIAL PRIMARY KEY,
 
 CREATE TABLE IF NOT EXISTS TRAVELS(ID SERIAL PRIMARY KEY,
                                     DRIVER_ID INTEGER,
-                                    PASSENGERS JSONB[],
+                                    PASSENGERS VARCHAR(255),
                                     DEPARTURE VARCHAR(50) NOT NULL,
                                     DEPARTURE_LATITUDE DOUBLE PRECISION,
                                     DEPARTURE_LONGITUDE DOUBLE PRECISION,
                                     DEPARTURE_DATE DATE NOT NULL,
-                                    DEPARTURE_TIME TIME NOT NULL,
+                                    DEPARTURE_TIME VARCHAR(5) NOT NULL,
                                     DESTINATION VARCHAR(50) NOT NULL,
                                     DESTINATION_LATITUDE DOUBLE PRECISION,
                                     DESTINATION_LONGITUDE DOUBLE PRECISION,
                                     DESTINATION_DATE DATE,
-                                    DESTINATION_TIME TIME,
+                                    DESTINATION_TIME VARCHAR(5),
                                     STATUS INTEGER DEFAULT 0);
 
 INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP)
@@ -56,28 +56,7 @@ VALUES ('janedoe', 'Jane', 'Doe', '1995-01-01', 'janedoe@example.com', '456 Park
 INSERT INTO USERS (USERNAME, FIRST_NAME, FAMILY_NAME, BIRTH_DATE, EMAIL, PHONE, ADDRESS, LOCALITY, ZIP, DRIVER_LICENSE_NUMBER)
 VALUES ('johnsmith', 'John', 'Smith', '1985-05-15', 'johnsmith@example.com', '555-1234', '123 Main St', 'Anytown', '1234', 'AB123456');
 
-INSERT INTO TRAVELS(DRIVER_ID, PASSENGERS, DEPARTURE, DEPARTURE_LATITUDE, DEPARTURE_LONGITUDE, DEPARTURE_DATE, DEPARTURE_TIME, DESTINATION, DESTINATION_LATITUDE, DESTINATION_LONGITUDE, DESTINATION_DATE, DESTINATION_TIME, STATUS)
-VALUES (1,     '[ { "passengeId": 2,
-                   "name": "Passager 1",
-                   "address": "Point A",
-                   "price": 20.50 },
-                 { "passengeId": 3,
-                   "name": "Passager 2",
-                   "address": "Point B",
-                   "price": 15.75  }
-                ]',
-           'Lieu de départ',
-           40.7128,
-           -74.0060,
-           '2023-10-30',
-           '08:00:00',
-           'Lieu d arrivée',
-    34.0522,
-    -118.2437,
-    '2023-10-31',
-    '10:00:00',
-    0
-);
+
 
 
 

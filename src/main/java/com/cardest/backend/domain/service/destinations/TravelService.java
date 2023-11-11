@@ -1,40 +1,48 @@
 package com.cardest.backend.domain.service.destinations;
 
-import com.cardest.backend.adapter.out.jpa.destinations.DestinationJpaEntity;
 import com.cardest.backend.adapter.out.jpa.destinations.TravelJpaEntity;
 import com.cardest.backend.adapter.out.mapper.destinations.TravelMapper;
 import com.cardest.backend.adapter.out.repository.destinations.TravelRepository;
-import com.cardest.backend.domain.model.destinations.Destination;
 import com.cardest.backend.domain.model.destinations.Travel;
 import com.cardest.backend.domain.service.GenericService;
+import com.cardest.backend.port.in.TravelUseCase;
+import com.cardest.backend.port.out.TravelDbUseCase;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 @RequiredArgsConstructor
-public class TravelService extends GenericService<Travel, TravelJpaEntity, TravelMapper, TravelRepository> {
+public class TravelService implements TravelUseCase {
 
-    private final TravelRepository travelRepository;
-    private final TravelMapper travelMapper;
-    @Override
-    protected TravelRepository getRepo() {
-        return travelRepository;
-    }
+    @Getter
+    private final TravelDbUseCase travelDbUseCase;
 
     @Override
-    protected TravelMapper getMapper() {
-        return travelMapper;
-    }
-
     public List<Travel> getAllTravels() {
-        List<Travel> travels = new ArrayList<>();
-        List<TravelJpaEntity> travelJpaEntities = travelRepository.findAll();
-        for(TravelJpaEntity travelJpaEntity : travelJpaEntities) {
-           travels.add(travelMapper.toDomainEntity(travelJpaEntity));
-        }
-        return travels;
+        return getTravelDbUseCase().getAllTravels();
+    }
+
+    @Override
+    public Travel getById(Long id) {
+        return getTravelDbUseCase().getById(id);
+    }
+
+    @Override
+    public void update(Travel travel, Long id) {
+        getTravelDbUseCase().update(travel, id);
+    }
+
+    @Override
+    public Travel create(Travel travel) {
+        return getTravelDbUseCase().create(travel);
+    }
+
+    @Override
+    public void delete(Long id) {
+        getTravelDbUseCase().delete(id);
     }
 }

@@ -1,60 +1,52 @@
 package com.cardest.backend.domain.service.users;
 
-import com.cardest.backend.adapter.out.jpa.users.UserJpaEntity;
-import com.cardest.backend.adapter.out.mapper.users.UserMapper;
-import com.cardest.backend.adapter.out.repository.users.UserRepository;
 import com.cardest.backend.domain.model.users.User;
-import com.cardest.backend.domain.service.GenericService;
-import com.cardest.backend.exception.RuleException;
+import com.cardest.backend.port.in.UserUseCase;
+import com.cardest.backend.port.out.UserDbUseCase;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Service
+
+
 @RequiredArgsConstructor
-public class UserService extends GenericService<User, UserJpaEntity, UserMapper, UserRepository> {
+public class UserService implements UserUseCase {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
-
-    @Override
-    public UserRepository getRepo() {
-        return userRepository;
-    }
+    @Getter
+    private final UserDbUseCase userDbUseCase;
 
     @Override
-    public UserMapper getMapper() {
-        return userMapper;
-    }
-
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-        List<UserJpaEntity> userJpaEntities = userRepository.findAll();
-        for(UserJpaEntity userJpaEntity : userJpaEntities) {
-            users.add(userMapper.toDomainEntity(userJpaEntity));
-        }
-        return users;
+        return getUserDbUseCase().getAllUsers();
     }
 
+    @Override
     public boolean isNewUser(String email) {
-        Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
-        if(userToGet.isPresent()){
-                return false;
-        }
-        return true;
+        return getUserDbUseCase().isNewUser(email);
     }
 
+    @Override
     public User getUserByEmail(String email) {
-        Optional<UserJpaEntity> userToGet = userRepository.findByEmail(email);
-        if(userToGet.isPresent()){
-            return userMapper.toDomainEntity(userToGet.get());
-        }
-        else{
-            throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
-        }
+        return getUserDbUseCase().getUserByEmail(email);
+    }
+
+    @Override
+    public User getById(Long id) {
+        return getUserDbUseCase().getById(id);
+    }
+
+    @Override
+    public void update(User user, Long id) {
+        getUserDbUseCase().update(user, id);
+    }
+
+    @Override
+    public User create(User user) {
+        return getUserDbUseCase().create(user);
+    }
+
+    @Override
+    public void delete(Long id) {
+        getUserDbUseCase().delete(id);
     }
 }

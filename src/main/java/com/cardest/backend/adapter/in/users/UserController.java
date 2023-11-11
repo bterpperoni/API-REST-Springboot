@@ -2,6 +2,7 @@ package com.cardest.backend.adapter.in.users;
 
 import com.cardest.backend.domain.model.users.User;
 import com.cardest.backend.domain.service.users.UserService;
+import com.cardest.backend.port.in.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequestMapping("/")
 public class UserController {
 
-    private final UserService userService;
+    private final UserUseCase userService;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {

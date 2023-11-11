@@ -18,9 +18,8 @@ public class Travel {
 
     private Long id;
     private String driverId;
-
-    private JsonNode passengers;
-
+    // passengers is a jsonb field
+    private String passengers;
     private String departure;
     private Double departureLatitude;
     private Double departureLongitude;

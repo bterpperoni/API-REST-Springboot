@@ -2,6 +2,7 @@ package com.cardest.backend.adapter.in.destinations;
 
 import com.cardest.backend.domain.model.destinations.Travel;
 import com.cardest.backend.domain.service.destinations.TravelService;
+import com.cardest.backend.port.in.TravelUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/")
 public class TravelController {
 
-    private final TravelService travelService;
+    private final TravelUseCase travelService;
 
     @GetMapping("/travels")
     public ResponseEntity<List<Travel>> getAllTravels() {

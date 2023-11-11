@@ -1,13 +1,13 @@
-package com.cardest.backend.domain.service;
-
-import java.util.Optional;
+package com.cardest.backend.adapter.out.persistence;
 
 import com.cardest.backend.adapter.out.mapper.GenericMapper;
 import com.cardest.backend.exception.RuleException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
-public abstract class GenericService<P, E, M extends GenericMapper<P, E>, R extends JpaRepository<E, Long>> {
+import java.util.Optional;
+
+public abstract class GenericPersistenceAdapter<P, E, M extends GenericMapper<P, E>, R extends JpaRepository<E, Long>> {
 
     protected abstract R getRepo();
 
