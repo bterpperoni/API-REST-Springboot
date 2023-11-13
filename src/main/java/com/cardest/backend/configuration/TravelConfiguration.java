@@ -17,7 +17,7 @@ public class TravelConfiguration {
 
     @Autowired
     public TravelRepository travelRepository;
-    public TravelMapper travelMapper;
+    public TravelMapper travelMapper = new TravelMapper();
     public TravelPersistenceAdapter travelPersistenceAdapter;
 
     @Bean

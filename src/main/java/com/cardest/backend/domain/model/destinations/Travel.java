@@ -17,7 +17,7 @@ import java.util.Date;
 public class Travel {
 
     private Long id;
-    private String driverId;
+    private int driverId;
     // passengers is a jsonb field
     private String passengers;
     private String departure;
@@ -28,7 +28,7 @@ public class Travel {
     private String destination;
     private Double destinationLatitude;
     private Double destinationLongitude;
-    private Date destinationlDate;
+    private Date destinationDate;
     private String destinationTime;
     private int status;
 

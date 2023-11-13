@@ -17,7 +17,7 @@ public class UserConfiguration {
 
     @Autowired
     public UserRepository userRepository;
-    public UserMapper userMapper;
+    public UserMapper userMapper = new UserMapper();
     public UserPersistenceAdapter userPersistenceAdapter;
 
     @Bean

@@ -19,7 +19,7 @@ public class TravelJpaEntity {
     private Long id;
 
     @Column(name = "DRIVER_ID")
-    private int driver;
+    private int driverId;
 
     @Column(name = "PASSENGERS", columnDefinition = "jsonb")
     private String passengers;
