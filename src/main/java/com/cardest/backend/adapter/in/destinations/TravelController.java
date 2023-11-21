@@ -22,9 +22,29 @@ public class TravelController {
         return ResponseEntity.ok().body(travels);
     }
 
+    @GetMapping("/travels/{id}")
+    public ResponseEntity<Travel> getTravelById(@PathVariable("id") Long id) {
+        Travel travel = travelService.getById(id);
+        return ResponseEntity.ok().body(travel);
+    }
+
     @PostMapping("/travels")
     public ResponseEntity<Travel> createTravel(@RequestBody Travel travel) {
         Travel travelBody = travelService.create(travel);
         return ResponseEntity.ok().body(travelBody);
     }
+
+    @PutMapping("/travels/{id}")
+    public ResponseEntity<Void> updateTravel(@RequestBody Travel travel, @PathVariable("id") Long id) {
+        travelService.update(travel, id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/travels/{id}")
+    public ResponseEntity<Void> deleteTravel(@PathVariable("id") Long id) {
+        travelService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

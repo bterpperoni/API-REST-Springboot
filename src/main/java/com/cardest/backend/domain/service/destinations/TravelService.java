@@ -26,6 +26,10 @@ public class TravelService implements TravelUseCase {
     }
 
     @Override
+    public Travel getByDriverId(Long id) {
+        return getTravelDbUseCase().getByDriverId(id);
+    }
+    @Override
     public void update(Travel travel, Long id) {
         getTravelDbUseCase().update(travel, id);
     }

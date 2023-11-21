@@ -48,6 +48,17 @@ public class TravelPersistenceAdapter implements TravelDbUseCase {
     }
 
     @Override
+    public Travel getByDriverId(Long id) {
+        Optional<TravelJpaEntity> travelToGet = travelRepository.findByDriverId(id);
+        if(travelToGet.isPresent()){
+            return travelMapper.toDomain(travelToGet.get());
+        }
+        else{
+            throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
     public void update(Travel travel, Long id) {
         Optional<TravelJpaEntity> travelToUpdate = travelRepository.findById(id);
         if (travelToUpdate.isPresent()) {

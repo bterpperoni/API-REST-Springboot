@@ -21,6 +21,9 @@ public class TravelJpaEntity {
     @Column(name = "DRIVER_ID")
     private int driverId;
 
+    @Column(name = "DRIVER_DISTANCE_PREFERENCE")
+    private int driverDistancePreference;
+
     @Column(name = "PASSENGERS", columnDefinition = "jsonb")
     private String passengers;
 

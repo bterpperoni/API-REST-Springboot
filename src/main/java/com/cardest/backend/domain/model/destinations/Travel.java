@@ -18,7 +18,7 @@ public class Travel {
 
     private Long id;
     private int driverId;
-    // passengers is a jsonb field
+    private int driverDistancePreference;
     private String passengers;
     private String departure;
     private Double departureLatitude;

@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS USERS (ID SERIAL PRIMARY KEY,
 
 CREATE TABLE IF NOT EXISTS TRAVELS(ID SERIAL PRIMARY KEY,
                                     DRIVER_ID INTEGER,
+                                    DRIVER_DISTANCE_PREFERENCE INTEGER,
                                     PASSENGERS VARCHAR(255),
                                     DEPARTURE VARCHAR(50) NOT NULL,
                                     DEPARTURE_LATITUDE DOUBLE PRECISION,

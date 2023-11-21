@@ -10,6 +10,7 @@ public class TravelMapper {
         Travel travel = new Travel();
         travel.setId(travelJpaEntity.getId());
         travel.setDriverId(travelJpaEntity.getDriverId());
+        travel.setDriverDistancePreference(travelJpaEntity.getDriverDistancePreference());
         travel.setPassengers(travelJpaEntity.getPassengers());
         travel.setDeparture(travelJpaEntity.getDeparture());
         travel.setDepartureLatitude(travelJpaEntity.getDepartureLatitude());
@@ -29,6 +30,7 @@ public class TravelMapper {
         TravelJpaEntity travelJpaEntity = new TravelJpaEntity();
         travelJpaEntity.setId(travel.getId());
         travelJpaEntity.setDriverId(travel.getDriverId());
+        travelJpaEntity.setDriverDistancePreference(travel.getDriverDistancePreference());
         travelJpaEntity.setPassengers(travel.getPassengers());
         travelJpaEntity.setDeparture(travel.getDeparture());
         travelJpaEntity.setDepartureLatitude(travel.getDepartureLatitude());
