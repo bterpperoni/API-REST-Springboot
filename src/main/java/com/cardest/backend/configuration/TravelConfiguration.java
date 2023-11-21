@@ -1,6 +1,7 @@
 package com.cardest.backend.configuration;
 
 import com.cardest.backend.adapter.out.mapper.destinations.TravelMapper;
+import com.cardest.backend.adapter.out.mapper.destinations.TravelMapperImpl;
 import com.cardest.backend.adapter.out.persistence.destinations.TravelPersistenceAdapter;
 import com.cardest.backend.adapter.out.repository.destinations.TravelRepository;
 import com.cardest.backend.domain.service.destinations.TravelService;
@@ -17,7 +18,7 @@ public class TravelConfiguration {
 
     @Autowired
     public TravelRepository travelRepository;
-    public TravelMapper travelMapper = new TravelMapper();
+    public TravelMapper travelMapper = new TravelMapperImpl();
     public TravelPersistenceAdapter travelPersistenceAdapter;
 
     @Bean

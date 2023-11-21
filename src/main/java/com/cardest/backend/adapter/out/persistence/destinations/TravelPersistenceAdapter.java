@@ -2,6 +2,7 @@ package com.cardest.backend.adapter.out.persistence.destinations;
 
 import com.cardest.backend.adapter.out.jpa.destinations.TravelJpaEntity;
 import com.cardest.backend.adapter.out.mapper.destinations.TravelMapper;
+import com.cardest.backend.adapter.out.persistence.GenericPersistenceAdapter;
 import com.cardest.backend.adapter.out.repository.destinations.TravelRepository;
 import com.cardest.backend.domain.model.destinations.Travel;
 import com.cardest.backend.exception.RuleException;
@@ -14,10 +15,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class TravelPersistenceAdapter implements TravelDbUseCase {
+public class TravelPersistenceAdapter extends GenericPersistenceAdapter<Travel, TravelJpaEntity, TravelMapper, TravelRepository> implements TravelDbUseCase {
 
     private final TravelRepository travelRepository;
     private final TravelMapper travelMapper;
+
+    @Override
+    protected TravelRepository getRepo() {
+        return travelRepository;
+    }
+
+    @Override
+    protected TravelMapper getMapper() {
+        return travelMapper;
+    }
 
     @Override
     public List<Travel> getAllTravels() {
@@ -30,6 +41,17 @@ public class TravelPersistenceAdapter implements TravelDbUseCase {
     }
 
     @Override
+    public Travel getByDriverId(Long id) {
+        Optional<TravelJpaEntity> travelToGet = travelRepository.findByDriverId(id);
+        if(travelToGet.isPresent()){
+            return travelMapper.toDomain(travelToGet.get());
+        }
+        else{
+            throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+   /* @Override
     public Travel create(Travel travel) {
         TravelJpaEntity travelJpaEntity = travelMapper.toJpaEntity(travel);
         TravelJpaEntity travelJpaEntitySaved = travelRepository.save(travelJpaEntity);
@@ -46,18 +68,6 @@ public class TravelPersistenceAdapter implements TravelDbUseCase {
             throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
         }
     }
-
-    @Override
-    public Travel getByDriverId(Long id) {
-        Optional<TravelJpaEntity> travelToGet = travelRepository.findByDriverId(id);
-        if(travelToGet.isPresent()){
-            return travelMapper.toDomain(travelToGet.get());
-        }
-        else{
-            throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @Override
     public void update(Travel travel, Long id) {
         Optional<TravelJpaEntity> travelToUpdate = travelRepository.findById(id);
@@ -73,5 +83,5 @@ public class TravelPersistenceAdapter implements TravelDbUseCase {
     @Override
     public void delete(Long id) {
         travelRepository.deleteById(id);
-    }
+    }*/
 }

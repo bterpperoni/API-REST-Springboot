@@ -1,8 +1,5 @@
 package com.cardest.backend.domain.model.destinations;
 
-import com.cardest.backend.domain.model.users.User;
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

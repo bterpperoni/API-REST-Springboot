@@ -1,6 +1,7 @@
 package com.cardest.backend.configuration;
 
 import com.cardest.backend.adapter.out.mapper.users.UserMapper;
+import com.cardest.backend.adapter.out.mapper.users.UserMapperImpl;
 import com.cardest.backend.adapter.out.persistence.users.UserPersistenceAdapter;
 import com.cardest.backend.adapter.out.repository.users.UserRepository;
 import com.cardest.backend.domain.service.users.UserService;
@@ -17,7 +18,7 @@ public class UserConfiguration {
 
     @Autowired
     public UserRepository userRepository;
-    public UserMapper userMapper = new UserMapper();
+    public UserMapper userMapper = new UserMapperImpl();
     public UserPersistenceAdapter userPersistenceAdapter;
 
     @Bean
