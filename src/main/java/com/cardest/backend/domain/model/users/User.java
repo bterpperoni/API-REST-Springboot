@@ -22,5 +22,6 @@ public class User {
     private String address;
     private String locality;
     private String zip;
+    private String campus;
     private boolean isNew;
 }
