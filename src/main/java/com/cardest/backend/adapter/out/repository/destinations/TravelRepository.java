@@ -4,7 +4,8 @@ package com.cardest.backend.adapter.out.repository.destinations;
 import com.cardest.backend.adapter.out.jpa.destinations.TravelJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import java.util.Optional;
+
+import java.util.List;
 
 public interface TravelRepository extends JpaRepository<TravelJpaEntity, Long> {
     /*
@@ -12,5 +13,5 @@ public interface TravelRepository extends JpaRepository<TravelJpaEntity, Long> {
      */
 
     @Query("SELECT t FROM TravelJpaEntity t WHERE t.driverId = :driverId")
-    Optional<TravelJpaEntity> findByDriverId(Long driverId);
+    List<TravelJpaEntity> findByDriverId(Long driverId);
 }

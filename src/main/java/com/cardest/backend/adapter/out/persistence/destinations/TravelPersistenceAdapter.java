@@ -41,14 +41,13 @@ public class TravelPersistenceAdapter extends GenericPersistenceAdapter<Travel, 
     }
 
     @Override
-    public Travel getByDriverId(Long id) {
-        Optional<TravelJpaEntity> travelToGet = travelRepository.findByDriverId(id);
-        if(travelToGet.isPresent()){
-            return travelMapper.toDomain(travelToGet.get());
+    public List<Travel> getByDriverId(Long id) {
+        List<Travel> travels = new ArrayList<>();
+        List<TravelJpaEntity> travelJpaEntities = travelRepository.findByDriverId(id);
+        for(TravelJpaEntity travelJpaEntity : travelJpaEntities) {
+            travels.add(travelMapper.toDomain(travelJpaEntity));
         }
-        else{
-            throw new RuleException("User not found", HttpStatus.BAD_REQUEST);
-        }
+        return travels;
     }
 
    /* @Override
