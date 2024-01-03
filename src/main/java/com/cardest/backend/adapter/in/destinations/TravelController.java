@@ -28,6 +28,12 @@ public class TravelController {
         return ResponseEntity.ok().body(travel);
     }
 
+    @GetMapping("/travels/driver/{id}")
+    public ResponseEntity<List<Travel>> getTravelByDriverId(@PathVariable("id") Long id) {
+        List<Travel> travels = travelService.getByDriverId(id);
+        return ResponseEntity.ok().body(travels);
+    }
+
     @PostMapping("/travels")
     public ResponseEntity<Travel> createTravel(@RequestBody Travel travel) {
         Travel travelBody = travelService.create(travel);

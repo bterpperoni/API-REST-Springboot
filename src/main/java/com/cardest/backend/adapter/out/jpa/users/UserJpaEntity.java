@@ -47,6 +47,9 @@ public class UserJpaEntity{
     @Column(name = "ZIP", length = 4)
     private String zip;
 
+    @Column(name = "CAMPUS", length = 50)
+    private String campus;
+
     @Column(name = "DRIVER_LICENSE_NUMBER", unique = true, length = 20)
     private String driverLicenseNumber;
 
